@@ -6,7 +6,11 @@ logger = logging.getLogger(__name__)
 
 router = APIRouter()
 
-# @router.get("/assistant")
-# async def _(request: Request):
-#     print("DA")
-#     print(f"IP-address: {request.client.host}")
+@router.get("/check-ip")
+async def check_ip(request: Request):
+    print("HEADERS", request.headers)
+    return {
+        "client_host": request.client.host,
+        "x_forwarded_for": request.headers.get("x-forwarded-for"),
+        "x_real_ip": request.headers.get("x-real-ip")
+    }
