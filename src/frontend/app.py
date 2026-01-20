@@ -7,9 +7,10 @@ import platform
 import src.frontend.middlewares.custom_chainlit as ccl
 from src.utils import log_output_message
 import time
+from src.utils.prompt_extraction import get_prompt
 
 load_dotenv()
-SYSTEM_PROMPT = os.getenv("SYSTEM_PROMPT")
+SYSTEM_PROMPT = get_prompt(prompt_name='llama3_prompt.yaml')
 OLLAMA_HOST = "localhost:11434" if platform.system() == "Windows" else os.getenv("OLLAMA_HOST")
 
 
