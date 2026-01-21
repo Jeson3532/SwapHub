@@ -14,3 +14,4 @@ class Users(BaseModel):
     experience: Mapped[int] = mapped_column(BigInteger, default=0, server_default="0",
                                                comment="Время работы пользователя (по идее нужно подключать систему отслеживания сессий, чтобы в конце рабочего дня ему капал опыт")
     role: Mapped[UserRole] = mapped_column(Enum(UserRole), nullable=False, default=UserRole.EMPLOYEE)
+
