@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Request
 
 
-router = APIRouter()
+router = APIRouter(tags=['Администрирование'])
 
 
 @router.get("/check-my-ip", description="Показывает реальный IP, если проект запущен на Unix-системе.")

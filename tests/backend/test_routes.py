@@ -10,7 +10,7 @@ async def client_session():
 
 @pytest.mark.asyncio
 async def test_ip_check(client_session: aiohttp.ClientSession):
-    async with client_session.get("http://localhost/check-ip") as response:
+    async with client_session.get("http://localhost/check-my-ip") as response:
         status_code = response.status
         assert status_code == 200
 
