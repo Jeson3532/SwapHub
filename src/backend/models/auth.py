@@ -1,5 +1,6 @@
 from pydantic import BaseModel, Field, EmailStr, ConfigDict
 from src.utils.enums import UserRole
+from typing import Optional
 
 
 class UserRegForm(BaseModel):
@@ -8,9 +9,15 @@ class UserRegForm(BaseModel):
     email: EmailStr
 
 
-class UserResponse(BaseModel):
+class UserRegResponse(BaseModel):
     username: str
     email: EmailStr
     role: UserRole
 
     model_config = ConfigDict(from_attributes=True)
+
+
+class UserDecodeTokenResponse(BaseModel):
+    identifier: str
+    display_name: Optional[str]
+    metadata: dict

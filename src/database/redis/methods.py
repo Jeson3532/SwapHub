@@ -8,7 +8,7 @@ logger = logging.getLogger(__name__)
 logging.basicConfig(level='DEBUG')
 
 
-async def set_address(identifier: str, address: str, exp: Annotated[int, "Время жизни в кеше (в секундах)"] = 60) -> \
+async def set_address(identifier: str, address: str, exp: Annotated[int, "Время жизни в кеше (в секундах)"] = 900) -> \
         Union[
             dict, None]:
     try:

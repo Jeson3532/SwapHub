@@ -93,17 +93,21 @@ async def add_log_info(information: str,
                        ip_address: Union[str, None] = None,
                        level: str = "INFO"
                        ):
+    # Информация о логе
     logfile_name = datetime.now().strftime("%d-%m-%Y") + ".log"
     full_path = os.path.join(path_dir, logfile_name)
     current_time = datetime.now().strftime("%H:%M:%S:%f")[:-2]
-
+    # Если нет директории
     os.makedirs(path_dir, exist_ok=True)
     file_exists = os.path.exists(full_path)
+    # Убрать переносы для чистоты
+    information = information.replace("\n", " ")
     try:
         async with aiofiles.open(full_path, "a", encoding=encoding) as f:
             if not file_exists:
                 await f.write(STATIC_LOG_DESIGN + '\n')
-            await f.write(f"{level}   |   {log_type.value}  |   {current_time}    |   {ip_address}  |   {information}\n")
+            await f.write(
+                f"{level}   |   {log_type.value}  |   {current_time}    |   {ip_address}  |   {information}\n")
     except PermissionError as e:
         logger.error(f'Ошибка на уровне прав: {e}')
     except OSError as e:

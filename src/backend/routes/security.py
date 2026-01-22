@@ -8,8 +8,9 @@ from src.utils.enums import UserRole
 router = APIRouter(prefix='/auth', tags=['Авторизация/Регистрация'])
 
 
+
 ### Далее - переделать, чтобы регистрировать сотрудников в системе мог только администратор
-@router.post("/register", response_model=auth_m.UserResponse)
+@router.post("/register", response_model=auth_m.UserRegResponse)
 async def _(form: auth_m.UserRegForm = Body()):
     attr = {
         "username": form.username,
@@ -19,4 +20,4 @@ async def _(form: auth_m.UserRegForm = Body()):
     }
     user = Users(**attr)
     await AuthMethods.register_user(user)
-    return auth_m.UserResponse.model_validate(attr)
+    return auth_m.UserRegResponse.model_validate(attr)

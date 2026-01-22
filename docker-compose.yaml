@@ -11,12 +11,15 @@ services:
       - redis_db
     volumes:
       - ./migrations/versions:/chatjpg/migrations/versions
+      - ./src/files:/chatjpg/src/files
   postgres_db:
     image: postgres
     env_file:
       - .env
     ports:
       - "5432:5432"
+    volumes:
+      - ./postgres_data:/var/lib/postgresql/18/docker
   ollama:
     image: ollama/ollama
     ports:
