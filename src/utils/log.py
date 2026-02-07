@@ -64,17 +64,24 @@ async def log_input_message(user: cl.User, message: cl.Message):
         logger.error(e)
 
 
-async def log_output_message(user: cl.User, message: cl.Message, time_answer: float):
+async def log_output_message(user: cl.User, message: cl.Message, ollama_meta: dict):
     log_type = LogTypes.MESSAGE_FROM_MODEL
     try:
         identifier = user.identifier
+        # ollama meta
+        total_duration: int | None = ollama_meta.get("total_duration", None)
+        output_tokens = ollama_meta.get("eval_count", None)
+        input_tokens = ollama_meta.get("prompt_eval_count", None)
         if identifier:
 
             address = await r_methods.get_address(identifier)
             message_id = await r_methods.get_message_id(identifier)
             if not message_id:
                 message_id = "Unknown"
-            msg = f"[{message_id}] Ответ модели для '{identifier}': {message.content} (Ответ занял {time_answer}s)"
+            msg = (f"[{message_id}] Ответ модели для '{identifier}': {message.content} "
+                   f"(Общее время ответа: {int(total_duration) / 1e9}s; "
+                   f"Input-токены: {input_tokens}; "
+                   f"Output-токены: {output_tokens})")
             logger.info(msg)
             await add_log_info(msg, level="INFO", log_type=log_type, ip_address=address)
 

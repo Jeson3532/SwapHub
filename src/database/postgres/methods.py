@@ -7,6 +7,7 @@ from sqlalchemy import select, exists
 from fastapi import HTTPException
 import asyncio
 
+
 class AuthMethods:
     @classmethod
     async def register_user(cls, user: Users) -> Union[Users, None]:
@@ -63,5 +64,3 @@ class AuthMethods:
             await session.rollback()
             logger.error(f'Ошибка при работе с AuthMethods: {e}')
             raise
-
-

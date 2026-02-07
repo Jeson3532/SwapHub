@@ -28,4 +28,4 @@
    - ```docker exec -it chatllma-postgres_db-1 alembic upgrade head```
 7. **Выполните команды для запуска контейнера:**
     - ```docker compose up -d --build```
-8. **Подключитесь к ветке localhost/assistant для получения доступа к ассистенту. (перед этим нужно зарегаться по ручке localhost/auth/register)**
+8. **Подключитесь к ветке localhost/assistant для получения доступа к ассистенту. (перед этим нужно зарегаться по ручке localhost/auth/register в Swagger'е либо через curl-запрос)**

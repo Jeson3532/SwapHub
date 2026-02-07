@@ -3,6 +3,8 @@ services:
     build: .
     env_file:
       - .env
+#    ports:
+#      - 127.0.0.1:8000:8000 # Linux
     expose:
       - "8000"
     depends_on:
@@ -39,7 +41,9 @@ services:
       - "6379:6379"
   nginx:
     image: nginx:latest
-    # network_mode: "host" # Linux
+#    network_mode: "host" # Linux
+#    extra_hosts:
+#      - "backend:127.0.0.1"
     ports:
       - "80:80"
     volumes:
